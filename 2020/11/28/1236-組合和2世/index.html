@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<!--Description-->
+
+
+
+    <meta name="description" content="題目龍我因為期中考考不好，決定奮發圖強，開始練習遞迴的題目，但才剛看到題目就受不了了，立刻拜託了你幫他看看這題怎麼寫，雖然你和他不熟，但看在同學一場，還是幫一下他吧。「請找出能加總成目標數字的所有組合，且所有可以用的數字都可以『無限次』的被使用。」
+輸入說明首先會是 1 個正整數 N（0 &amp;lt; "/>
+
+
+<!--Author-->
+
+    <meta name="author" content="Anpig"/>
+
+
+<!--Open Graph Title-->
+
+    <meta property="og:title" content="1236 . 組合和2世"/>
+
+
+<!--Open Graph Description-->
+
+    <meta property="og:description" content="題目龍我因為期中考考不好，決定奮發圖強，開始練習遞迴的題目，但才剛看到題目就受不了了，立刻拜託了你幫他看看這題怎麼寫，雖然你和他不熟，但看在同學一場，還是幫一下他吧。「請找出能加總成目標數字的所有組合，且所有可以用的數字都可以『無限次』的被使用。」
+輸入說明首先會是 1 個正整數 N（0 &amp;lt; "/>
+
+
+<!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Amaterasu"/>
+
+<!--Type page-->
+
+    <meta property="og:type" content="article"/>
+
+
+<!--Page Cover-->
+
+
+    <meta property="og:image" content="https://blog.anpig.me/img/home-bg.png"/>
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+
+
+
+
+    <meta name="twitter:image" content="https://blog.anpig.me/img/home-bg.png"/>
+
+
+<!-- Title -->
+
+<title>1236 . 組合和2世 | Amaterasu</title>
+
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">
+
+<!-- Custom CSS -->
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<!-- Custom Fonts -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.0/css/all.min.css" />
+<link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.0/css/all.min.css" />
+<link href="//fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css"/>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<!-- Gallery -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/featherlight@1.4.0/src/featherlight.css" integrity="sha256-30DV/STftlyQ6v8yaOWlabammvCYtRJERLj/m0b3zno=" crossorigin="anonymous">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/css/lightgallery.min.css">
+
+<!-- favicon -->
+
+<link rel="icon" href="/img/favicon.png"/>
+
+
+
+    <!-- Google Analytics -->
+    
+
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+<!-- Head tag -->
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top bg-transparent position-absolute w-100 p-0" id="nav">
+    <div class="container pl-0 pr-0">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <a class="navbar-brand text-white p-1 pl-3" href="/">Anpig's Blog</a>
+        </div>
+        <div class="navbar-nav float-right">
+            <button class="btn btn-link search-btn navbar-item" data-toggle="modal" data-target="#searchModal">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('/img/home-bg.png')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 text-center">
+                <div class="post-heading text-white">
+                    <h1>1236 . 組合和2世</h1>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Main Content -->
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                
+                    <span class="meta d-inline-block">
+    
+        <i class="far fa-bookmark fa-fw"></i>
+        
+
+<a href="/categories/%E9%A1%8C%E8%A7%A3/">題解</a>
+
+    
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="fas fa-user-edit"></i>
+        Anpig
+    
+    <!-- Date -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-calendar-check fa-fw"></i>
+        2020-11-28
+    
+    <!-- word count and read count -->
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-file-word fa-fw"></i>
+        1.2k
+    
+
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-clock fa-fw"></i>
+        4 Minutes
+    
+
+    
+</span>  
+                
+                <h3 id="題目"><a href="#題目" class="headerlink" title="題目"></a>題目</h3><p><del>龍我因為期中考考不好，決定奮發圖強，開始練習遞迴的題目，<br>但才剛看到題目就受不了了，立刻拜託了你幫他看看這題怎麼寫，<br>雖然你和他不熟，但看在同學一場，還是幫一下他吧。</del><br>「請找出能加總成目標數字的所有組合，<br>且所有可以用的數字都可以『無限次』的被使用。」</p>
+<h5 id="輸入說明"><a href="#輸入說明" class="headerlink" title="輸入說明"></a>輸入說明</h5><p>首先會是 1 個正整數 N（0 &lt; N &lt; 10），表示測資的數量。<br>接下來每 2 行會是一筆測資，第 1 行為 1 個正整數 A（&lt; 100），<br>代表目標的數字，第 2 行是一串嚴格遞增的正整數（&lt; 20，最多 10 個數字），<br>表示可以用的數字，會以 0 結尾（0 不包含在可以用的數字裡）。</p>
+<h5 id="輸出說明"><a href="#輸出說明" class="headerlink" title="輸出說明"></a>輸出說明</h5><p>對每筆測資，輸出「finish」（有解）或「no solution」（無解）。<br>若有解，則在 finish 之前輸出可以加總成目標數字的所有組合，<br>有用到越多越小的數字的組合排前面，每個解各佔 1 行。</p>
+<h3 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h3><p>首先開個陣列<code>int arr[21];</code>紀錄給定能用的數字；<br>而<code>int ans[101];</code>紀錄已選的數字，<br>長度開<code>101</code>是因為<code>A &lt; 100</code>，且能使用的數字都是正整數，<br>所以最長的情況也就用 99 個<code>1</code>來達成，開大一點是我個人的習慣。<br>（其實也可以開<code>21</code>，改存每個數用了幾次，但我當初沒想到，現在也懶得改。）</p>
+<p>現在開始建造遞迴函數，給它三個參數，<br>分別是：</p>
+<ol>
+<li><code>n</code>： 現在要選「能選的數字」中的第幾個數字</li>
+<li><code>sum</code>： 我們想要得到的目標（組合和）</li>
+<li><code>used</code>： 已經用過幾個數（最後需要輸出幾個數）</li>
+</ol>
+<p>再來我們要設定遞迴的中止點，<br>可能的中止點有：</p>
+<ol>
+<li>目前的組合和剛好跟目標一樣了（<code>sum == A</code>）</li>
+<li>目前的組合和超過目標了（<code>sum &gt; A</code>）</li>
+<li>沒有能用的數了（<code>n &gt;= N</code>）</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (sum == A) &#123;</span><br><span class="line">    havesol = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; used; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, ans[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (sum &gt; A) <span class="keyword">return</span>;</span><br><span class="line"><span class="keyword">if</span> (n &gt;= N) <span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+
+
+<p>要注意 1. 的情形因為題目有要求判斷有沒有解，<br>所以我們這時候也要把解的狀態改成有解（第 2 行）。</p>
+<p>如果遞迴還沒結束，那我們得想接下來要怎麼做。</p>
+<p>我以前聽一位老師講過一句話，不過我忘記是誰了，<br>他說：「先相信你的遞迴是對的，再來想要怎麼做。」<br>所以我先相信我下一次遞迴時它會自己幫我檢查錯誤，<br>先把現在的第<code>s</code>個數存進組合裡再說（<code>ans[used] = arr[n];</code>），<br>事實上它的確會這麼做，因為我們在上面設定了中止點。</p>
+<p>再來，因為題目說每個數字都可以用無限次，<br>所以我們尋找第<code>n</code>個數字繼續使用的可能，<br><code>dfs(n, sum + arr[n], used + 1);</code>。</p>
+<p>然而，如果下一次遞迴發現把第<code>n</code>個數加進去行不通，<br>就得尋找使用下一個數（第<code>n + 1</code>個數）的可能，<br>不過因為<code>arr[21]</code>這個陣列是嚴格遞增數列，<br>所以其實在<strong>這一層</strong>第<code>n</code>個不行的話，第<code>n + 1</code>個一定也不行，<br>這時候就會<code>return</code>了，但是到了<strong>上一層</strong>的話，<br>第<code>n + 1</code>個是有可能被使用的，<br>所以下面這一行（第 14 行）其實是寫給<strong>上一層</strong>看的。<br><code>dfs(n + 1, sum, used);</code></p>
+<p>遞迴函數：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> sum, <span class="keyword">int</span> used)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (sum == A) &#123;</span><br><span class="line">        havesol = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; used; i++) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, ans[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (sum &gt; A) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (n &gt;= N) <span class="keyword">return</span>;</span><br><span class="line">    ans[used] = arr[n];</span><br><span class="line">    <span class="built_in">dfs</span>(n, sum + arr[n], used + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">dfs</span>(n + <span class="number">1</span>, sum, used);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>寫完遞迴其實就寫完了，最後<code>main</code>函數裡的輸入輸出搞一搞就完成了。</p>
+<h4 id="完整程式碼："><a href="#完整程式碼：" class="headerlink" title="完整程式碼："></a>完整程式碼：</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> A, arr[<span class="number">21</span>], N, havesol = <span class="number">0</span>, ans[<span class="number">21</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> sum, <span class="keyword">int</span> used)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (sum == A) &#123;</span><br><span class="line">        havesol = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; used; i++) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, ans[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (sum &gt; A) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (n &gt;= N) <span class="keyword">return</span>;</span><br><span class="line">    ans[used] = arr[n];</span><br><span class="line">    <span class="built_in">dfs</span>(n, sum + arr[n], used + <span class="number">1</span>);</span><br><span class="line">    <span class="built_in">dfs</span>(n + <span class="number">1</span>, sum, used);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span> ,&amp;T);</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;A);</span><br><span class="line">        havesol = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">21</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> c;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;c);</span><br><span class="line">            <span class="keyword">if</span> (c == <span class="number">0</span>) &#123;</span><br><span class="line">                N = i;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            arr[i] = c;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">dfs</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (havesol == <span class="number">0</span>) <span class="built_in">printf</span>(<span class="string">&quot;no solution\n&quot;</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;finish\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+            </div>
+
+            <!-- Post information -->
+            
+    <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 post-tags">
+        
+            <i class="fas fa-tag" style="vertical-align: middle;font-size: .8rem;"></i>
+            tags:&nbsp;
+            
+            
+        
+            <a href="/tags/Formosa-OJ/">#Formosa OJ</a> <a href="/tags/遞迴/">#遞迴</a> <a href="/tags/DFS/">#DFS</a> <a href="/tags/Backtrack/">#Backtrack</a> <a href="/tags/窮舉/">#窮舉</a>
+        
+    </div>
+
+            
+    <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+        <ul class="pagination d-block text-center">
+            
+                <li class="previous page-item d-inline"><a href="/2020/11/29/1237-Binary-Watch/" class="page-link float-left">&larr;  下一頁</a></li>
+            
+            
+                <li class="next page-item d-inline"><a href="/2020/11/27/1239-%E6%9C%80%E7%B5%82%E5%85%B5%E5%99%A8X/" class="page-link float-right">上一頁  &rarr;</a></li>
+            
+        </ul>
+    </div>
+
+
+            
+                <!-- Comments -->
+                
+
+                
+
+            
+
+        </div>
+    </div>
+</article> 
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+    <style>
+        #toc-content .toc-link::before {
+            background-color: transparent;
+            max-height: 25px;
+        }
+
+        #toc-content .toc-link.is-active-link::before {
+            background-color: #404040;
+        }
+    </style>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <div class="ui-toc dropup scrollspy-body pull-right" style="right: 3%;">
+        <button type="button" class="toc-btn btn btn-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+            <i class="fas fa-list"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right p-2"  aria-labelledby="tocLabel">
+            <div class="toc-widget">
+                <div id="toc-content" class="text-truncate">
+                </div>
+            </div>
+            <div class="toc-menu pt-3 pl-4">
+                <a class="expand-toggle d-block py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
+                <a class="back-to-top d-block py-1" href="#">回到頂部</a>
+                <a class="go-to-bottom d-block py-1" href="#">移至底部</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        tocbot.init({
+            // Where to render the table of contents.
+            tocSelector: '#toc-content',
+            // Where to grab the headings to build the table of contents.
+            contentSelector: 'article',
+            // Which headings to grab inside of the contentSelector element.
+            headingSelector: 'h1, h2, h3',
+            // For headings inside relative or absolute positioned containers within content.
+            hasInnerContainers: true,
+        });
+    </script>
+
+
+    
+
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 text-center">
+                <ul class="list-inline">
+                    
+
+                    
+
+                    
+                        <li class="list-inline-item">
+                            <a rel="external" href="https://github.com/anpig" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+                        <li class="list-inline-item">
+                            <a rel="external" href="mailto:pkid0anpig@gmail.com" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="far fa-envelope fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+                </ul>
+                <ul class="copyright footer-menu list-inline">
+                    
+                    
+                        <li class="list-inline-item">
+                            
+                            
+                            <a href="/">
+                                
+                                    Home
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
+                            <a href="/archives">
+                                
+                                    Archives
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
+                            <a href="/tags">
+                                
+                                    Tags
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
+                            <a href="/categories">
+                                
+                                    Categories
+                                
+                            </a>
+                        </li>
+                    
+                        <li class="list-inline-item">
+                            
+                                <span class="copyright-split">&nbsp;|&nbsp;</span>
+                            
+                            
+                            <a href="/about">
+                                
+                                    About
+                                
+                            </a>
+                        </li>
+                    
+                </ul>
+                <p class="copyright footer-author">
+                    &copy; 2020-2022 
+                    <a rel="external" class="copyright-link" href="Anpig" target="_blank">Anpig</a><br/>
+                    Powered by <a rel="external" class="copyright-link" href="https://hexo.io/" target="_blank">Hexo</a>  
+                    <span class="copyright-split">&nbsp;|&nbsp;&nbsp;</span>
+                    Theme <a rel="external" class="copyright-link" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
+                    
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    <!-- jQuery -->
+<script src="//cdn.jsdelivr.net/npm/jquery@2.1.4/dist/jquery.min.js"></script>
+
+<!-- For drop down -->
+<script src="//cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
+<!-- Gallery -->
+<script src="//cdn.jsdelivr.net/npm/lightgallery@1.6.11/dist/js/lightgallery-all.min.js"></script>
+<!-- Busuanzi -->
+
+
+<!-- Search script -->
+
+<script src="/js/search.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        searchFunc( '/search.xml' , 'searchInput', 'searchResult');
+    });
+</script>
+
+
+
+<script src="/js/main.js"></script>
+
+
+
+    <!-- Search Modal -->
+    <!-- Modal -->
+<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content overflow-auto">
+            <div class="modal-header">
+                <input type="text" class="form-control" placeholder="搜尋關鍵字..." id="searchInput">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div id="searchResult">
+                    <div class="search-empty text-center text-muted p-5">
+                        <i class="far fa-meh"></i>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

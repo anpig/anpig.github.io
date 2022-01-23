@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-TW">
 <head>
     <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -9,7 +9,7 @@
 
 
 
-    <meta name="description" content="Anpig&#39;s Blog"/>
+    <meta name="description" content="前言之前在挑筆電時看到了 Razer Blade，外型長得乾乾淨淨方正俐落，又帶著電競筆電的性能，被我稱為「電競 MacBook Pro」，後來朋友又傳給我之前 Reddit 上有人在 Razer Blade 上安裝 Hackintosh 的案例，就決定要打造一台「真．電競 MacBook Pro」"/>
 
 
 <!--Author-->
@@ -24,7 +24,7 @@
 
 <!--Open Graph Description-->
 
-    <meta property="og:description" content="Anpig&#39;s Blog"/>
+    <meta property="og:description" content="前言之前在挑筆電時看到了 Razer Blade，外型長得乾乾淨淨方正俐落，又帶著電競筆電的性能，被我稱為「電競 MacBook Pro」，後來朋友又傳給我之前 Reddit 上有人在 Razer Blade 上安裝 Hackintosh 的案例，就決定要打造一台「真．電競 MacBook Pro」"/>
 
 
 <!--Open Graph Site Name-->
@@ -38,7 +38,7 @@
 <!--Page Cover-->
 
 
-    <meta property="og:image" content="http://blog.anpig.me/img/home-bg.png"/>
+    <meta property="og:image" content="https://blog.anpig.me/img/home-bg.png"/>
 
 
 <meta name="twitter:card" content="summary_large_image"/>
@@ -46,7 +46,7 @@
 
 
 
-    <meta name="twitter:image" content="http://blog.anpig.me/img/home-bg.png"/>
+    <meta name="twitter:image" content="https://blog.anpig.me/img/home-bg.png"/>
 
 
 <!-- Title -->
@@ -89,7 +89,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 6.0.0"></head>
 <!-- Head tag -->
 
 <body>
@@ -156,7 +156,15 @@
     
     <!-- word count and read count -->
     
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-file-word fa-fw"></i>
+        651
+    
 
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-clock fa-fw"></i>
+        2 Minutes
     
 
     
@@ -167,7 +175,7 @@
 <h3 id="觸控板"><a href="#觸控板" class="headerlink" title="觸控板"></a>觸控板</h3><p>雖然文章的作者說他的觸控板可以用，但實際上我在使用的時候是要靠賽的，有時候可以有時候不行，後來發現是 VoodooI2C 的問題，之後的版本有修正了。</p>
 <h3 id="聲音"><a href="#聲音" class="headerlink" title="聲音"></a>聲音</h3><p>還有一個問題是聲音，調音量的時候會顯示一個禁止符號，要根據主機板使用的 codec 來調整<code>config.plist</code>裡的<a target="_blank" rel="noopener" href="https://dortania.github.io/OpenCore-Post-Install/universal/audio.html#finding-your-layout-id">layout ID</a>。</p>
 <h3 id="網路"><a href="#網路" class="headerlink" title="網路"></a>網路</h3><p>因為 2020 的版本用的無線網卡是 Intel 的 ax201，所以必須裝<a target="_blank" rel="noopener" href="https://github.com/OpenIntelWireless/itlwm">itlwm</a>和一個做得很逼真的 Wi-Fi menu 才能動，而且還不能跑全速。後來他們出了<a target="_blank" rel="noopener" href="https://openintelwireless.github.io/itlwm/">AirportItlwm</a>可以用 macOS 原本的 Wi-Fi menu，還支援 AirDrop 和 HandOff 等功能。</p>
-<h2 id="EFI"><a href="#EFI" class="headerlink" title="EFI"></a>EFI</h2><p>OpenCore 的 EFI 只是一個文字選單的畫面，頗陽春，所以我照著 <a target="_blank" rel="noopener" href="https://github.com/dortania/Hackintosh-Mini-Guides/blob/master/refind.md">這篇文</a> 來裝 rEFInd。裝好了之後發現它其實會自動搜尋 Boot Entry，而且我自己設定的 Boot Entry 跑不了（我猜是因為我不會設定），所以後來就把自訂的 Entries 刪掉了。但是這裡還有一個問題，就是有兩個 Entries 會進入 OpenCore，而且 OpenCore 的文字選單還是在那。有兩個 Entries 的原因是因為它會同時讀到<code>BOOTx64.efi</code>和<code>OpenCore.efi</code>，我把<code>OpenCore.efi</code>移除之後發現它沒辦法成功進入 OpenCore，於是我把它放回來，把<code>BOOTx64.efi</code>移除，就成功減少一個 Entry 了。至於 OpenCore 的文字選單，可以在 OpenCore 選單按<code>Ctrl + Enter</code>來設定預設選項，再把<code>config.plist</code>裡的<code>showpicker</code>改成<code>false</code>，如此一來只要在 rEFInd 裡面選擇這個 Entry 就可以直接進入 macOS。<br>我的 rEFInd 使用的主題是 <a target="_blank" rel="noopener" href="https://github.com/EvanPurkhiser/rEFInd-minimal">EvanPurkhiser 的 rEFInd-minimal</a>，它不會顯示文字，省了我這個強迫症患者蠻多事的。</p>
+<h2 id="EFI"><a href="#EFI" class="headerlink" title="EFI"></a>EFI</h2><p>OpenCore 的 EFI 只是一個文字選單的畫面，頗陽春，所以我照著 這篇文 來裝 rEFInd。裝好了之後發現它其實會自動搜尋 Boot Entry，而且我自己設定的 Boot Entry 跑不了（我猜是因為我不會設定），所以後來就把自訂的 Entries 刪掉了。但是這裡還有一個問題，就是有兩個 Entries 會進入 OpenCore，而且 OpenCore 的文字選單還是在那。有兩個 Entries 的原因是因為它會同時讀到<code>BOOTx64.efi</code>和<code>OpenCore.efi</code>，我把<code>OpenCore.efi</code>移除之後發現它沒辦法成功進入 OpenCore，於是我把它放回來，把<code>BOOTx64.efi</code>移除，就成功減少一個 Entry 了。至於 OpenCore 的文字選單，可以在 OpenCore 選單按<code>Ctrl + Enter</code>來設定預設選項，再把<code>config.plist</code>裡的<code>showpicker</code>改成<code>false</code>，如此一來只要在 rEFInd 裡面選擇這個 Entry 就可以直接進入 macOS。<br>我的 rEFInd 使用的主題是 <a target="_blank" rel="noopener" href="https://github.com/EvanPurkhiser/rEFInd-minimal">EvanPurkhiser 的 rEFInd-minimal</a>，它不會顯示文字，省了我這個強迫症患者蠻多事的。</p>
 <h2 id="Arch-Linux"><a href="#Arch-Linux" class="headerlink" title="Arch Linux"></a>Arch Linux</h2><p>我使用的 Window Manager 是 <a target="_blank" rel="noopener" href="https://github.com/sddm/sddm/">sddm</a> + <a target="_blank" rel="noopener" href="https://awesomewm.org/">awesome</a>。<br>sddm 的主題是 <a target="_blank" rel="noopener" href="https://store.kde.org/p/1312658/">MarianArlt 的 Sugar Candy</a>，<br>awesome 的主題是 <a target="_blank" rel="noopener" href="https://github.com/WillPower3309/awesome-dotfiles">WillPower3309 的 Pastel</a>，<br>但 Mod4 + R 的 Run 功能不知道出了什麼問題所以又裝了 <a target="_blank" rel="noopener" href="https://github.com/streetturtle/awesome-wm-widgets/tree/master/run-shell">streetturtle 的 run-shell</a>。<br>最後裝了 <a target="_blank" rel="noopener" href="https://github.com/meskarune/i3lock-fancy">meskarune 的 i3lock-fancy</a>。</p>
 
             </div>
@@ -189,10 +197,10 @@
     <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
         <ul class="pagination d-block text-center">
             
-                <li class="previous page-item d-inline"><a href="/2021/05/14/Discord-Bot-%E9%86%9C%E7%8B%97%E6%A9%9F%E5%99%A8%E4%BA%BA-Xiang/" class="page-link float-left">&larr;  Newer Posts</a></li>
+                <li class="previous page-item d-inline"><a href="/2021/05/14/Discord-Bot-%E9%86%9C%E7%8B%97%E6%A9%9F%E5%99%A8%E4%BA%BA-Xiang/" class="page-link float-left">&larr;  下一頁</a></li>
             
             
-                <li class="next page-item d-inline"><a href="/2021/01/30/%E4%BA%A4%E5%A4%A7%E8%B3%87%E5%B7%A5%E5%A4%A7%E4%B8%80%E4%B8%8A/" class="page-link float-right">Older Posts  &rarr;</a></li>
+                <li class="next page-item d-inline"><a href="/2021/01/30/%E4%BA%A4%E5%A4%A7%E8%B3%87%E5%B7%A5%E5%A4%A7%E4%B8%80%E4%B8%8A/" class="page-link float-right">上一頁  &rarr;</a></li>
             
         </ul>
     </div>
@@ -233,9 +241,9 @@
                 </div>
             </div>
             <div class="toc-menu pt-3 pl-4">
-                <a class="expand-toggle d-block py-1" href="#"><span class="expand-text">Expand all</span><span class="close-text" style="display: none;">Collapse all</span></a>
-                <a class="back-to-top d-block py-1" href="#">Back to top</a>
-                <a class="go-to-bottom d-block py-1" href="#">Go to bottom</a>
+                <a class="expand-toggle d-block py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
+                <a class="back-to-top d-block py-1" href="#">回到頂部</a>
+                <a class="go-to-bottom d-block py-1" href="#">移至底部</a>
             </div>
         </div>
     </div>
@@ -270,9 +278,27 @@
                     
 
                     
+                        <li class="list-inline-item">
+                            <a rel="external" href="https://github.com/anpig" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
 
                     
 
+                    
+                        <li class="list-inline-item">
+                            <a rel="external" href="mailto:pkid0anpig@gmail.com" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="far fa-envelope fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
                     
 
                     
@@ -340,8 +366,8 @@
                     
                 </ul>
                 <p class="copyright footer-author">
-                    &copy; 2020-2021 
-                    <a rel="external" class="copyright-link" href="" target="_blank">Anpig</a><br/>
+                    &copy; 2020-2022 
+                    <a rel="external" class="copyright-link" href="Anpig" target="_blank">Anpig</a><br/>
                     Powered by <a rel="external" class="copyright-link" href="https://hexo.io/" target="_blank">Hexo</a>  
                     <span class="copyright-split">&nbsp;|&nbsp;&nbsp;</span>
                     Theme <a rel="external" class="copyright-link" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
@@ -390,7 +416,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content overflow-auto">
             <div class="modal-header">
-                <input type="text" class="form-control" placeholder="Searching Keywords..." id="searchInput">
+                <input type="text" class="form-control" placeholder="搜尋關鍵字..." id="searchInput">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">

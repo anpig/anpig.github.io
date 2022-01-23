@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-TW">
 <head>
     <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -9,7 +9,7 @@
 
 
 
-    <meta name="description" content="Anpig&#39;s Blog"/>
+    <meta name="description" content="題目二進位制手錶頂部有 4 個 LED 代表小時（0-11），底部的 6 個 LED 代表分鐘（0-59）。每個 LED 代表一個 0 或 1，最低位在右側。例如，上面的二進位制手錶讀取 “3:25”。上圖取自 leetcode Binary Watch，題目也是改自 leecode Binary "/>
 
 
 <!--Author-->
@@ -24,7 +24,7 @@
 
 <!--Open Graph Description-->
 
-    <meta property="og:description" content="Anpig&#39;s Blog"/>
+    <meta property="og:description" content="題目二進位制手錶頂部有 4 個 LED 代表小時（0-11），底部的 6 個 LED 代表分鐘（0-59）。每個 LED 代表一個 0 或 1，最低位在右側。例如，上面的二進位制手錶讀取 “3:25”。上圖取自 leetcode Binary Watch，題目也是改自 leecode Binary "/>
 
 
 <!--Open Graph Site Name-->
@@ -38,7 +38,7 @@
 <!--Page Cover-->
 
 
-    <meta property="og:image" content="http://blog.anpig.me/img/home-bg.png"/>
+    <meta property="og:image" content="https://blog.anpig.me/img/home-bg.png"/>
 
 
 <meta name="twitter:card" content="summary_large_image"/>
@@ -46,7 +46,7 @@
 
 
 
-    <meta name="twitter:image" content="http://blog.anpig.me/img/home-bg.png"/>
+    <meta name="twitter:image" content="https://blog.anpig.me/img/home-bg.png"/>
 
 
 <!-- Title -->
@@ -89,7 +89,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 6.0.0"></head>
 <!-- Head tag -->
 
 <body>
@@ -156,7 +156,15 @@
     
     <!-- word count and read count -->
     
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-file-word fa-fw"></i>
+        1.1k
+    
 
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-clock fa-fw"></i>
+        4 Minutes
     
 
     
@@ -177,7 +185,8 @@
 <li>沒有燈可以選了（<code>n &gt; 10</code>）</li>
 <li>選到的燈數跟題目要求的一樣（<code>chosen == on</code>，其中<code>on</code>代表題目輸入）</li>
 </ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (n &gt; <span class="number">10</span>) <span class="keyword">return</span>;</span><br><span class="line"><span class="keyword">if</span> (chosen == on) &#123;</span><br><span class="line">    有的沒的處理;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (n &gt; <span class="number">10</span>) <span class="keyword">return</span>;</span><br><span class="line"><span class="keyword">if</span> (chosen == on) &#123;</span><br><span class="line">    有的沒的處理;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+
 <p>由於我們有設定中止點了，所以先放心地把第<code>n</code>顆 LED 打開（設成<code>1</code>）：<br><code>led[n] = 1;</code></p>
 <p>再尋找下一顆打開的可能，由於我們選了第<code>n</code>顆，所以<code>chosen</code>要加 1：<br><code>dfs(n + 1, chosen + 1);</code></p>
 <p>再來我們要試試看不選第<code>n</code>顆的可能，所以先讓第<code>n</code>顆熄滅（設成<code>0</code>）：<br><code>led[n] = 0;</code></p>
@@ -185,15 +194,19 @@
 <p>這樣遞迴的部分就完成了，接下來開始有的沒的處理。</p>
 <p>題目要求不合理的時間不要計算，所以我們先檢查選這<code>n</code>顆燈代表的時間合不合理：<br>由於這隻錶是二進位錶，我宣告了一個變數<code>pow</code>，讓它先等於 1，<br>之後每換下一顆燈就再乘以 2。<br>由於<code>led[i]</code>會是<code>0</code>或<code>1</code>，所以<code>+= led[i] * pow</code>就只是代表會不會把<code>pow</code>加進去而已。</p>
 <p>先算分鐘數，由於<code>led[i]</code>會是<code>0</code>或<code>1</code>，<br>所以<code>min += led[i] * pow</code>就代表會不會把<code>pow</code>加<code>min</code>而已，<br>超過 60 分鐘（<code>&gt;= 60</code>）代表這是不合理的時間，所以不把它加進總和。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> min = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> <span class="built_in">pow</span> = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">    min += led[i] * <span class="built_in">pow</span>;</span><br><span class="line">    <span class="built_in">pow</span> *= <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (min &gt;= <span class="number">60</span>) <span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> min = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> pow = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">    min += led[i] * pow;</span><br><span class="line">    pow *= <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (min &gt;= <span class="number">60</span>) <span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+
 <p>再算小時數，由於<code>led[i]</code>會是<code>0</code>或<code>1</code>，<br>所以<code>hr += led[i] * pow</code>就代表會不會把<code>pow</code>加<code>hr</code>而已，<br>超過 12 小時（<code>&gt;= 12</code>）代表這是不合理的時間，所以不把它加進總和。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> hr = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">pow</span> = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">6</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    hr += led[i] * <span class="built_in">pow</span>;</span><br><span class="line">    <span class="built_in">pow</span> *= <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (hr &gt;= <span class="number">12</span>) <span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> hr = <span class="number">0</span>;</span><br><span class="line">pow = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">6</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    hr += led[i] * pow;</span><br><span class="line">    pow *= <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (hr &gt;= <span class="number">12</span>) <span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+
 <p>確保時間是合理的之後，就可以把它加進總和裡了。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sum += hr * <span class="number">60</span> + min;</span><br><span class="line"><span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sum += hr * <span class="number">60</span> + min;</span><br><span class="line"><span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
+
 <p>遞迴函數：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> chosen)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &gt; <span class="number">10</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (chosen == on) &#123;</span><br><span class="line">        <span class="keyword">int</span> min = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> <span class="built_in">pow</span> = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">            min += led[i] * <span class="built_in">pow</span>;</span><br><span class="line">            <span class="built_in">pow</span> *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (min &gt;= <span class="number">60</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">int</span> hr = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">pow</span> = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">            hr += led[i + <span class="number">6</span>] * <span class="built_in">pow</span>;</span><br><span class="line">            <span class="built_in">pow</span> *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (hr &gt;= <span class="number">12</span>) <span class="keyword">return</span>;</span><br><span class="line">        sum += hr * <span class="number">60</span> + min;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    led[n] = <span class="number">1</span>;</span><br><span class="line">    dfs(n + <span class="number">1</span>, chosen + <span class="number">1</span>);</span><br><span class="line">    led[n] = <span class="number">0</span>;</span><br><span class="line">    dfs(n + <span class="number">1</span>, chosen);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> chosen)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &gt; <span class="number">10</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (chosen == on) &#123;</span><br><span class="line">        <span class="keyword">int</span> min = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> pow = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">            min += led[i] * pow;</span><br><span class="line">            pow *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (min &gt;= <span class="number">60</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">int</span> hr = <span class="number">0</span>;</span><br><span class="line">        pow = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">            hr += led[i + <span class="number">6</span>] * pow;</span><br><span class="line">            pow *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (hr &gt;= <span class="number">12</span>) <span class="keyword">return</span>;</span><br><span class="line">        sum += hr * <span class="number">60</span> + min;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    led[n] = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">dfs</span>(n + <span class="number">1</span>, chosen + <span class="number">1</span>);</span><br><span class="line">    led[n] = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">dfs</span>(n + <span class="number">1</span>, chosen);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>遞迴函數寫完之後，把輸入輸出搞一搞這題就結束了。</p>
-<h4 id="完整程式碼："><a href="#完整程式碼：" class="headerlink" title="完整程式碼："></a>完整程式碼：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> sum, led[<span class="number">11</span>], on;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> chosen)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &gt; <span class="number">10</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (chosen == on) &#123;</span><br><span class="line">        <span class="keyword">int</span> min = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> <span class="built_in">pow</span> = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">            min += led[i] * <span class="built_in">pow</span>;</span><br><span class="line">            <span class="built_in">pow</span> *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (min &gt;= <span class="number">60</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">int</span> hr = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">pow</span> = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">            hr += led[i + <span class="number">6</span>] * <span class="built_in">pow</span>;</span><br><span class="line">            <span class="built_in">pow</span> *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (hr &gt;= <span class="number">12</span>) <span class="keyword">return</span>;</span><br><span class="line">        sum += hr * <span class="number">60</span> + min;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    led[n] = <span class="number">1</span>;</span><br><span class="line">    dfs(n + <span class="number">1</span>, chosen + <span class="number">1</span>);</span><br><span class="line">    led[n] = <span class="number">0</span>;</span><br><span class="line">    dfs(n + <span class="number">1</span>, chosen);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;on);</span><br><span class="line">        sum = <span class="number">0</span>;</span><br><span class="line">        dfs(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="完整程式碼："><a href="#完整程式碼：" class="headerlink" title="完整程式碼："></a>完整程式碼：</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> sum, led[<span class="number">11</span>], on;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> chosen)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &gt; <span class="number">10</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (chosen == on) &#123;</span><br><span class="line">        <span class="keyword">int</span> min = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> pow = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">6</span>; i++) &#123;</span><br><span class="line">            min += led[i] * pow;</span><br><span class="line">            pow *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (min &gt;= <span class="number">60</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">int</span> hr = <span class="number">0</span>;</span><br><span class="line">        pow = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">            hr += led[i + <span class="number">6</span>] * pow;</span><br><span class="line">            pow *= <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (hr &gt;= <span class="number">12</span>) <span class="keyword">return</span>;</span><br><span class="line">        sum += hr * <span class="number">60</span> + min;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    led[n] = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">dfs</span>(n + <span class="number">1</span>, chosen + <span class="number">1</span>);</span><br><span class="line">    led[n] = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">dfs</span>(n + <span class="number">1</span>, chosen);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;on);</span><br><span class="line">        sum = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">dfs</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
             </div>
 
             <!-- Post information -->
@@ -213,10 +226,10 @@
     <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
         <ul class="pagination d-block text-center">
             
-                <li class="previous page-item d-inline"><a href="/2021/01/30/%E4%BA%A4%E5%A4%A7%E8%B3%87%E5%B7%A5%E5%A4%A7%E4%B8%80%E4%B8%8A/" class="page-link float-left">&larr;  Newer Posts</a></li>
+                <li class="previous page-item d-inline"><a href="/2021/01/30/%E4%BA%A4%E5%A4%A7%E8%B3%87%E5%B7%A5%E5%A4%A7%E4%B8%80%E4%B8%8A/" class="page-link float-left">&larr;  下一頁</a></li>
             
             
-                <li class="next page-item d-inline"><a href="/2020/11/28/1236%20.%20%E7%B5%84%E5%90%88%E5%92%8C2%E4%B8%96/" class="page-link float-right">Older Posts  &rarr;</a></li>
+                <li class="next page-item d-inline"><a href="/2020/11/28/1236-%E7%B5%84%E5%90%88%E5%92%8C2%E4%B8%96/" class="page-link float-right">上一頁  &rarr;</a></li>
             
         </ul>
     </div>
@@ -257,9 +270,9 @@
                 </div>
             </div>
             <div class="toc-menu pt-3 pl-4">
-                <a class="expand-toggle d-block py-1" href="#"><span class="expand-text">Expand all</span><span class="close-text" style="display: none;">Collapse all</span></a>
-                <a class="back-to-top d-block py-1" href="#">Back to top</a>
-                <a class="go-to-bottom d-block py-1" href="#">Go to bottom</a>
+                <a class="expand-toggle d-block py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
+                <a class="back-to-top d-block py-1" href="#">回到頂部</a>
+                <a class="go-to-bottom d-block py-1" href="#">移至底部</a>
             </div>
         </div>
     </div>
@@ -294,9 +307,27 @@
                     
 
                     
+                        <li class="list-inline-item">
+                            <a rel="external" href="https://github.com/anpig" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
 
                     
 
+                    
+                        <li class="list-inline-item">
+                            <a rel="external" href="mailto:pkid0anpig@gmail.com" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="far fa-envelope fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
                     
 
                     
@@ -364,8 +395,8 @@
                     
                 </ul>
                 <p class="copyright footer-author">
-                    &copy; 2020-2021 
-                    <a rel="external" class="copyright-link" href="" target="_blank">Anpig</a><br/>
+                    &copy; 2020-2022 
+                    <a rel="external" class="copyright-link" href="Anpig" target="_blank">Anpig</a><br/>
                     Powered by <a rel="external" class="copyright-link" href="https://hexo.io/" target="_blank">Hexo</a>  
                     <span class="copyright-split">&nbsp;|&nbsp;&nbsp;</span>
                     Theme <a rel="external" class="copyright-link" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
@@ -414,7 +445,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content overflow-auto">
             <div class="modal-header">
-                <input type="text" class="form-control" placeholder="Searching Keywords..." id="searchInput">
+                <input type="text" class="form-control" placeholder="搜尋關鍵字..." id="searchInput">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">

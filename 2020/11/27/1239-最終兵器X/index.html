@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-TW">
 <head>
     <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -9,7 +9,8 @@
 
 
 
-    <meta name="description" content="Anpig&#39;s Blog"/>
+    <meta name="description" content="題目西元 2185 年，地球人終於有能力征服其他有生物的星球，不過卻受到該星球生物的反擊。於是科學家們發明了一種「最終兵器 X」，它能自動攻擊左上、上、右上、右、右下、下、左下、左等八個方向的敵人，只要在地圖上放上幾台，就可以不費吹灰之力消滅敵人。
+輸入說明輸入第一行會有一個正整數 T，表示總共有幾"/>
 
 
 <!--Author-->
@@ -24,7 +25,8 @@
 
 <!--Open Graph Description-->
 
-    <meta property="og:description" content="Anpig&#39;s Blog"/>
+    <meta property="og:description" content="題目西元 2185 年，地球人終於有能力征服其他有生物的星球，不過卻受到該星球生物的反擊。於是科學家們發明了一種「最終兵器 X」，它能自動攻擊左上、上、右上、右、右下、下、左下、左等八個方向的敵人，只要在地圖上放上幾台，就可以不費吹灰之力消滅敵人。
+輸入說明輸入第一行會有一個正整數 T，表示總共有幾"/>
 
 
 <!--Open Graph Site Name-->
@@ -38,7 +40,7 @@
 <!--Page Cover-->
 
 
-    <meta property="og:image" content="http://blog.anpig.me/img/home-bg.png"/>
+    <meta property="og:image" content="https://blog.anpig.me/img/home-bg.png"/>
 
 
 <meta name="twitter:card" content="summary_large_image"/>
@@ -46,7 +48,7 @@
 
 
 
-    <meta name="twitter:image" content="http://blog.anpig.me/img/home-bg.png"/>
+    <meta name="twitter:image" content="https://blog.anpig.me/img/home-bg.png"/>
 
 
 <!-- Title -->
@@ -89,7 +91,7 @@
     
 
 
-<meta name="generator" content="Hexo 5.3.0"></head>
+<meta name="generator" content="Hexo 6.0.0"></head>
 <!-- Head tag -->
 
 <body>
@@ -156,7 +158,15 @@
     
     <!-- word count and read count -->
     
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-file-word fa-fw"></i>
+        1k
+    
 
+    
+        <span class="post-meta-split">&nbsp;|&nbsp;</span>
+        <i class="far fa-clock fa-fw"></i>
+        4 Minutes
     
 
     
@@ -168,19 +178,19 @@
 <h3 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h3><p>這題其實就是把八皇后變成 N 皇后。</p>
 <p>我們可以先開一個陣列<code>int queen[15];</code>，<br>存放「每一列」要在「哪一欄」放皇后，<br>因此哪一列就是陣列的 index，<br>而在該 index 的值就是指在那一列的哪一欄放皇后。<br>（這個部分其實輸出說明算是有提示到）</p>
 <p>再來開始建造遞迴函數。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (conflict(n, i) == <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">        queen[n] = i;</span><br><span class="line">        solve(n + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">conflict</span>(n, i) == <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">        queen[n] = i;</span><br><span class="line">        <span class="built_in">solve</span>(n + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我遞迴的想法是：<br><code>solve(n)</code>代表現在要放第<code>n</code>個皇后了。<br>先不管會被其他皇后吃掉的情形，<br>我們有<code>N</code>個位置可以放皇后（0 ~ N - 1），<br>所以先放一個<code>for</code>迴圈，<br>到迴圈裡面再判斷該位置能不能放皇后，<br>如果可以的話，就紀錄那個位置，<br>也就是第<code>n</code>個皇后（第<code>n</code>列）放在第<code>i</code>欄，<br>寫作<code>queen[n] = i;</code>。</p>
 <p>記錄下來之後我們就可以開始考慮放下一個皇后，<br>所以呼叫<code>solve(n + 1);</code>。</p>
 <p>現在回到判斷格子能不能放的問題。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">conflict</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (t == queen[i]) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> ((n - i) == (t - queen[i])|| (n - i) == (t - queen[i]) * <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">conflict</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (t == queen[i]) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> ((n - i) == (t - queen[i])|| (n - i) == (t - queen[i]) * <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>這個<code>conflict</code>函數的參數<code>n</code>, <code>t</code>，<br>其實可以理解為棋盤的 x 和 y，<br>或是說第<code>n</code>個皇后放在第<code>t</code>欄；</p>
 <p>而它的回傳值是<code>0</code>或<code>1</code><br>（其實它是個布林值，只是我懶得<code>include</code>）：<br><code>0</code>代表第<code>n</code>個皇后可以放在第<code>t</code>欄；<br><code>1</code>代表第<code>n</code>個皇后不能放在第<code>t</code>欄。</p>
 <p>先來一個<code>for</code>迴圈，<br>因為要和先前放的所有皇后比較。</p>
 <p>第三行的<code>if (t == queen[i]) return 1;</code>，<br>是要看它和第<code>i</code>個皇后會不會位在同一欄<br>（由於我們宣告<code>queen[]</code>的想法已經不會讓皇后位在同一列了，<br>所以不需要再另外判斷皇后會不會在同一列）。</p>
 <p>第四行的<code>(n - i)</code>和<code>(t - queen[i])</code><br>可以理解為 x 和 y 的位移，當它們的絕對值一樣，<br>代表它們位在同一條斜線上。</p>
 <p>最後回到<code>solve</code>函數，<br>當我們遞迴到<code>solve(N)</code>時就代表已經放完棋子了<br>（因為棋子會在第<code>0</code>到<code>N - 1</code>列），<br>該停止了，不然會一直遞迴下去。<br>所以加上 2 ~ 8 這幾行，讓它輸出，就完成這題了。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == N) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, queen[i] + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (conflict(n, i) == <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">        queen[n] = i;</span><br><span class="line">        solve(n + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="完整程式碼："><a href="#完整程式碼：" class="headerlink" title="完整程式碼："></a>完整程式碼：</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> T, N;</span><br><span class="line"><span class="keyword">int</span> queen[<span class="number">15</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">conflict</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (t == queen[i]) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> ((n - i) == (t - queen[i])|| (n - i) == (t - queen[i]) * <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == N) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, queen[i] + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (conflict(n, i) == <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">        queen[n] = i;</span><br><span class="line">        solve(n + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line">        solve(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == N) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, queen[i] + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">conflict</span>(n, i) == <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">        queen[n] = i;</span><br><span class="line">        <span class="built_in">solve</span>(n + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="完整程式碼："><a href="#完整程式碼：" class="headerlink" title="完整程式碼："></a>完整程式碼：</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> T, N;</span><br><span class="line"><span class="keyword">int</span> queen[<span class="number">15</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">conflict</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (t == queen[i]) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> ((n - i) == (t - queen[i])|| (n - i) == (t - queen[i]) * <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == N) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, queen[i] + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">conflict</span>(n, i) == <span class="number">1</span>) <span class="keyword">continue</span>;</span><br><span class="line">        queen[n] = i;</span><br><span class="line">        <span class="built_in">solve</span>(n + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line">        <span class="built_in">solve</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
             </div>
 
             <!-- Post information -->
@@ -200,10 +210,10 @@
     <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
         <ul class="pagination d-block text-center">
             
-                <li class="previous page-item d-inline"><a href="/2020/11/28/1236%20.%20%E7%B5%84%E5%90%88%E5%92%8C2%E4%B8%96/" class="page-link float-left">&larr;  Newer Posts</a></li>
+                <li class="previous page-item d-inline"><a href="/2020/11/28/1236-%E7%B5%84%E5%90%88%E5%92%8C2%E4%B8%96/" class="page-link float-left">&larr;  下一頁</a></li>
             
             
-                <li class="next page-item d-inline"><a href="/2020/11/26/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%EF%BC%8C%E7%B4%80%E5%BF%B5%E4%B8%80%E4%B8%8B/" class="page-link float-right">Older Posts  &rarr;</a></li>
+                <li class="next page-item d-inline"><a href="/2020/11/26/%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%EF%BC%8C%E7%B4%80%E5%BF%B5%E4%B8%80%E4%B8%8B/" class="page-link float-right">上一頁  &rarr;</a></li>
             
         </ul>
     </div>
@@ -244,9 +254,9 @@
                 </div>
             </div>
             <div class="toc-menu pt-3 pl-4">
-                <a class="expand-toggle d-block py-1" href="#"><span class="expand-text">Expand all</span><span class="close-text" style="display: none;">Collapse all</span></a>
-                <a class="back-to-top d-block py-1" href="#">Back to top</a>
-                <a class="go-to-bottom d-block py-1" href="#">Go to bottom</a>
+                <a class="expand-toggle d-block py-1" href="#"><span class="expand-text">全部展開</span><span class="close-text" style="display: none;">全部收起</span></a>
+                <a class="back-to-top d-block py-1" href="#">回到頂部</a>
+                <a class="go-to-bottom d-block py-1" href="#">移至底部</a>
             </div>
         </div>
     </div>
@@ -281,9 +291,27 @@
                     
 
                     
+                        <li class="list-inline-item">
+                            <a rel="external" href="https://github.com/anpig" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
 
                     
 
+                    
+                        <li class="list-inline-item">
+                            <a rel="external" href="mailto:pkid0anpig@gmail.com" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="far fa-envelope fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
                     
 
                     
@@ -351,8 +379,8 @@
                     
                 </ul>
                 <p class="copyright footer-author">
-                    &copy; 2020-2021 
-                    <a rel="external" class="copyright-link" href="" target="_blank">Anpig</a><br/>
+                    &copy; 2020-2022 
+                    <a rel="external" class="copyright-link" href="Anpig" target="_blank">Anpig</a><br/>
                     Powered by <a rel="external" class="copyright-link" href="https://hexo.io/" target="_blank">Hexo</a>  
                     <span class="copyright-split">&nbsp;|&nbsp;&nbsp;</span>
                     Theme <a rel="external" class="copyright-link" href="https://github.com/luswdev/hexo-theme-clean.git" target="_blank">Clean</a>
@@ -401,7 +429,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content overflow-auto">
             <div class="modal-header">
-                <input type="text" class="form-control" placeholder="Searching Keywords..." id="searchInput">
+                <input type="text" class="form-control" placeholder="搜尋關鍵字..." id="searchInput">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">
